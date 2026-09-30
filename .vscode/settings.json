@@ -1,0 +1,19 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/CVS": true,
+        ".vscode": true,
+        "lucy-compiler/out.elf": true,
+        "lucy-compiler/out.S": true,
+        "lucy-compiler/__pycache__": true
+    },
+    "hide-files.files": [
+        "lucy-compiler/out.elf",
+        "lucy-compiler/out.S",
+        "lucy-compiler/__pycache__"
+    ]
+}
