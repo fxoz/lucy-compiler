@@ -1,11 +1,23 @@
-from language import CODE, DATA_TYPE, CodeLine, FunctionDefinition, IndentationError
+from language import (
+    CODE,
+    CodeLine,
+    FunctionDefinition,
+    IndentationError,
+    Parameter,
+    to_data_type,
+    MAIN_FUNCTION,
+)
 
 
 def new_function_definition(line: str) -> FunctionDefinition:
-    params: dict[str, DATA_TYPE] = {
-        param.split()[0]: param.split()[1]
-        for param in line.split("[")[1].split("]")[0].split(", ")
-    }
+    params: list[Parameter] = []
+    for i, param in enumerate(line.split("[")[1].split("]")[0].split(", ")):
+        if not param:
+            continue
+        param_name, param_type = param.split()
+        params.append(
+            Parameter(name=param_name, data_type=to_data_type(param_type), position=i)
+        )
 
     return FunctionDefinition(
         name=line.split()[1].split("[")[0],
@@ -21,7 +33,7 @@ def ensure_corrent_indent(indentation_level: int, current_indentation: int, i: i
         )
 
 
-def lex(inp: str):
+def lex(inp: str) -> list[FunctionDefinition]:
     main_body: CODE = []
     indentation_level = 0
     current_function_definition = None
@@ -57,7 +69,10 @@ def lex(inp: str):
 
         # --- ADD TO CONTEXT ---
 
-        line = CodeLine(line_no=i + 1, content=line.strip())
+        line = CodeLine(
+            content=line.strip(),
+            line_no=i + 1,
+        )
 
         if current_function_definition:
             current_function_body.append(line)
@@ -66,7 +81,7 @@ def lex(inp: str):
 
         indentation_level = current_indentation
 
-    main_function = FunctionDefinition(name="__main__", params={}, output_type=None)
+    main_function = FunctionDefinition(name=MAIN_FUNCTION, params={}, output_type=None)
     main_function.set_body(main_body)
     functions.append(main_function)
 

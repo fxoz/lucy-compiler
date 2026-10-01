@@ -13,7 +13,7 @@ fun add[c int, d int] -> int
 fun bar[e int, f int] -> int
     print("bar")
 
-print("hey there {add(1+2)}")
+# print("hey there {add(1+2)}")
 
 # commment
 

@@ -21,8 +21,8 @@ This is a learning project, with zero AI generated content.
     - [x] Indentation handling
     - [x] Source locations / line numbers
 - [ ] Parser
+  - [x] Statements
   - [ ] Expressions
-  - [ ] Statements
   - [ ] Error reporting
 - [ ] AST
   - [ ] Define node types
