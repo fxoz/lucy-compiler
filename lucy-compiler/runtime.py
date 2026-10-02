@@ -3,6 +3,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+from rich import print
+
 
 def run(code: str):
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -19,6 +21,7 @@ def run(code: str):
                 "-march=rv32im",
                 "-mabi=ilp32",
                 "-nostdlib",
+                "-Wl,--no-relax",
                 "-o",
                 executable,
                 source,
@@ -27,6 +30,8 @@ def run(code: str):
             stderr=subprocess.DEVNULL if "-v" not in sys.argv else None,
         )
 
-        result = subprocess.run(["qemu-riscv32", executable])
+        result = subprocess.run(["qemu-riscv32", executable], check=False)
 
-        print(result.returncode)
+        print(
+            f"\n[{'green' if result.returncode == 0 else 'red'}]Program exited with code {result.returncode}[/]"
+        )

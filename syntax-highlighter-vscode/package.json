@@ -1,0 +1,28 @@
+{
+  "name": "lucy-syntax",
+  "displayName": "Lucy Syntax",
+  "description": "Simple syntax highlighting for the evolving Lucy language.",
+  "version": "0.1.1",
+  "publisher": "lucy-local",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Programming Languages"],
+  "license": "MIT",
+  "contributes": {
+    "configurationDefaults": {
+      "[lucy]": {
+        "editor.fontLigatures": true
+      }
+    },
+    "languages": [{
+      "id": "lucy",
+      "aliases": ["Lucy", "lucy"],
+      "extensions": [".lucy"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "lucy",
+      "scopeName": "source.lucy",
+      "path": "./syntaxes/lucy.tmLanguage.json"
+    }]
+  }
+}

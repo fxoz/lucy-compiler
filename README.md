@@ -2,7 +2,9 @@
 
 My attempt at writing a language (Lucy), compiler and runtime. Translates to RISC-V-32.
 
-This is a learning project, with zero AI generated content.
+This is a learning project, with zero AI generated base code.*
+
+*This excludes the syntax highlighting extension `syntax-highlighter-vscode` for VSCode, written by GPT-6.1-Sol. This was done to make temporary debugging easier.
 
 ## Roadmap
 

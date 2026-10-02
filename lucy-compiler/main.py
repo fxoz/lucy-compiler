@@ -1,26 +1,20 @@
+import generator  # noqa: F401
 import lexer
 import parser
-import runtime
-import generator
-
-
+import runtime  # noqa: F401
 from language import FunctionDefinition
-
 from rich import print
 
-
 with open("test.lucy", "r", encoding="utf8") as f:
-    code = f.read()
+    lucy_code = f.read()
 
-
-function_constructs: list[FunctionDefinition] = lexer.lex(code)
-
+function_constructs: list[FunctionDefinition] = lexer.lex(lucy_code)
 
 for fun in function_constructs:
-    print(fun)
-    for res in parser.parse_function(fun):
-        print(res)
+    fun.set_parsed(parser.parse_function(fun))
+    # print(fun)
 
-# assembly = generator.generate(parsed)
+assembly = generator.generate(function_constructs)
+open("../debug/out.s", "w", encoding="utf8").write(assembly)
 
-# runtime.run(assembly)
+runtime.run(assembly)

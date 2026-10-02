@@ -1,5 +1,5 @@
 from language import (
-    CODE,
+    CODE_LINES,
     CodeLine,
     FunctionDefinition,
     IndentationError,
@@ -34,10 +34,10 @@ def ensure_corrent_indent(indentation_level: int, current_indentation: int, i: i
 
 
 def lex(inp: str) -> list[FunctionDefinition]:
-    main_body: CODE = []
+    main_body: CODE_LINES = []
     indentation_level = 0
     current_function_definition = None
-    current_function_body: CODE = []
+    current_function_body: CODE_LINES = []
     functions: list = []
 
     for i, line in enumerate(inp.splitlines()):

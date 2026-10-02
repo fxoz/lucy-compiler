@@ -1,20 +1,24 @@
-print("start")
+# int a = 1
+# if 1 == a
+#     print("start")
+print("first\n")
 
 fun foo[a int, b int] -> int
-    print("foo")
+print("foo\n")
 
 fun add[c int, d int] -> int
-    if 1 == 1 # always true
-        print("hi")
+#     if 1 == 1 # always true
+#         print("hi")
 
-    print("hi")
-    => a + b
+print("hi\n")
+=> a + b
 
 fun bar[e int, f int] -> int
-    print("bar")
+print("bar\n")
 
 # print("hey there {add(1+2)}")
 
 # commment
 
-exit(123)
+print("Hello world\n")
+# exit(123)

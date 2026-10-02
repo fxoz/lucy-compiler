@@ -1,10 +1,15 @@
 from types import UnionType
 
 DATA_TYPE: UnionType = int | float | str | bool | None
-CODE = list
 
-ALLOCATION_PSEUDO_FUNCTION = "___allocate_last_result"
-MAIN_FUNCTION = "___main___"
+VAR_SET_FUNCTION = "___set"  # simple allocations like a = 1
+VAR_SET_TYPE_FUNCTION = (
+    "___set_type"  # "int" part of int a = 1. use *before* VAR_SET_FUNCTION!
+)
+
+ALLOCATE_LAST_RESULT_FUNCTION = "___allocate_last_result"  # a = foo()
+RETURN_STATEMENT_FUNCTION = "___return"  # return statement, optionally with a value
+MAIN_FUNCTION = "___main___"  # anything not inside a function
 
 
 class IndentationError(Exception):
@@ -18,6 +23,9 @@ class CodeLine:
 
     def __repr__(self):
         return f'CodeLine(line_no={self.line_no}, content="{self.content.replace('"', "‌'")}")'
+
+
+CODE_LINES = list[CodeLine]
 
 
 class Parameter:
@@ -45,27 +53,41 @@ class Argument:
         return f"Argument(value={'"' if isinstance(self.value, str) else ''}{self.value}{'"' if isinstance(self.value, str) else ''}, position={self.position})"
 
 
+class FunctionCall:
+    def __init__(self, name: str, args: list[Argument], code_line: CodeLine = None):
+        self.name = name
+        self.args = args
+        self.code_line = code_line
+
+    def __repr__(self):
+        return f"FunctionCall(name={self.name}, args={self.args})"
+
+    def show(self):
+        return f"{self.name}({', '.join(str(arg.value) for arg in self.args)})"
+
+
+class ConditionalBlock:
+    def __init__(self, condition_expression: str, body: CODE_LINES):
+        self.condition_expression = condition_expression
+        self.body = body
+
+
 class FunctionDefinition:
     def __init__(self, name: str, params: list[Parameter], output_type: DATA_TYPE):
         self.name = name
         self.params = params
         self.output_type = output_type
-        self.body: CODE = []
+        self.body: CODE_LINES = []
+        self.parsed: list[FunctionCall | ConditionalBlock] = []
 
-    def set_body(self, body: CODE):
+    def set_body(self, body: CODE_LINES):
         self.body = body
 
-    def __repr__(self):
-        return f"FunctionDefinition(name={self.name}, params={self.params}, output_type={self.output_type}, body={'...' if len(self.body) > 0 else 'None'})"
-
-
-class FunctionCall:
-    def __init__(self, name: str, args: list[Argument]):
-        self.name = name
-        self.args = args
+    def set_parsed(self, parsed: list[FunctionCall | ConditionalBlock]):
+        self.parsed = parsed
 
     def __repr__(self):
-        return f"FunctionCall(name={self.name}, args={self.args})"
+        return f"FunctionDefinition(name={self.name}, params={self.params}, output_type={self.output_type}, body={'...' if len(self.body) > 0 else 'None'}, parsed={'...' if len(self.parsed) > 0 else 'None'})"
 
 
 def to_data_type(type_str: str) -> DATA_TYPE:
