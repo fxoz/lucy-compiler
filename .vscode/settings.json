@@ -9,11 +9,17 @@
         ".vscode": true,
         "lucy-compiler/out.elf": true,
         "lucy-compiler/out.S": true,
-        "lucy-compiler/__pycache__": true
+        "lucy-compiler/__pycache__": true,
+        "lucy_compiler/__pycache__": true,
+        ".venv": true,
+        "tests/__pycache__": true
     },
     "hide-files.files": [
         "lucy-compiler/out.elf",
         "lucy-compiler/out.S",
-        "lucy-compiler/__pycache__"
+        "lucy-compiler/__pycache__",
+        "lucy_compiler/__pycache__",
+        ".venv",
+        "tests/__pycache__"
     ]
 }

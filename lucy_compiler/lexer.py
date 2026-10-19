@@ -1,11 +1,11 @@
-from language import (
+from .language import (
     CODE_LINES,
+    MAIN_FUNCTION,
     CodeLine,
     FunctionDefinition,
     IndentationError,
     Parameter,
     to_data_type,
-    MAIN_FUNCTION,
 )
 
 

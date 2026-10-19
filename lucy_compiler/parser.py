@@ -1,19 +1,18 @@
-from language import (
+from rich import print
+
+from . import variables
+from .language import (
     ALLOCATE_LAST_RESULT_FUNCTION,
-    Argument,
-    CodeLine,
-    FunctionCall,
-    FunctionDefinition,
+    RETURN_STATEMENT_FUNCTION,
     VAR_SET_FUNCTION,
     VAR_SET_TYPE_FUNCTION,
-    to_data_type,
-    RETURN_STATEMENT_FUNCTION,
+    Argument,
+    CodeLine,
     ConditionalBlock,
+    FunctionCall,
+    FunctionDefinition,
+    to_data_type,
 )
-
-import variables
-
-from rich import print
 
 # TODO - Later write fake lines for function calls inside of arguments:
 # TODO - i. e. print(add(1, 2)) => _t1 = add(1, 2); print(_t1)

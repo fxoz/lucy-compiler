@@ -1,4 +1,4 @@
-from language import (
+from .language import (
     DATA_TYPE,
     VAR_SET_FUNCTION,
     VAR_SET_TYPE_FUNCTION,

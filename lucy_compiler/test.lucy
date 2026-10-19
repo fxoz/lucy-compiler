@@ -1,7 +1,7 @@
 # int a = 1
 # if 1 == a
 #     print("start")
-print("first\n")
+print("hi there\n")
 
 fun foo[a int, b int] -> int
 print("foo\n")
@@ -11,7 +11,7 @@ fun add[c int, d int] -> int
 #         print("hi")
 
 print("hi\n")
-=> a + b
+# => a + b
 
 fun bar[e int, f int] -> int
 print("bar\n")

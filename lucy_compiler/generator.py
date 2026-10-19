@@ -1,16 +1,16 @@
-from language import (
-    FunctionDefinition,
-    FunctionCall,
-    ConditionalBlock,
-    Argument,
-    Parameter,
+from rich import print
+
+from .language import (
     DATA_TYPE,
     MAIN_FUNCTION,
     VAR_SET_FUNCTION,
     VAR_SET_TYPE_FUNCTION,
+    Argument,
+    ConditionalBlock,
+    FunctionCall,
+    FunctionDefinition,
+    Parameter,
 )
-
-from rich import print
 
 
 class Code:
@@ -51,6 +51,10 @@ ecall
 
 
 def generate_function_call(call: FunctionCall, code: Code) -> None:
+    if call.name == "println":
+        call.name = "print"
+        call.args[0].value += "\n"
+
     if call.name == VAR_SET_TYPE_FUNCTION:
         code.string_literals[call.args[0].value] = (
             "" if call.args[1].value == str else 0
